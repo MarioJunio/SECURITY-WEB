@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Entrar - Security</title>
+
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,400&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css" />
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css" />
+
+<!--Import materialize.css-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" />
+
+<link rel="stylesheet" th:href="@{/css/login_layout.css}" type="text/css" />
+
+<!--Let browser know website is optimized for mobile-->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col offset-s3 offset-m5 offset-l5 s8 m8 l5">
+				<img th:src="@{/img/logo.png}" alt="Security logo" class="img-logo" />
+			</div>
+		</div>
+
+		<div id="message-bar" th:if="${param.error} or ${param.logout}" class="message-bar z-depth-1 hoverable">
+			<i class="material-icons mb-left">info</i> <span id="error-message" th:if="${param.error}">USUÁRIO E/OU SENHA
+				INVÁLIDO(S)</span> <span id="logout-message" th:if="${param.logout}">SUA SESSÃO FOI ENCERRADA COM SUCESSO, ATÉ LOGO!</span> <a
+				id="mb-close" class="mb-right" href="#"><i class="material-icons">close</i></a>
+		</div>
+
+		<div class="row">
+
+			<div class="card hoverable col offset-s2 offset-m2 offset-l2 s8 m8 l5 box-login">
+
+				<div class="card-stacked">
+
+					<form id="frm-auth" th:action="@{/auth}" method="post">
+
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+						<div class="card-content">
+
+							<div class="row">
+								<div class="input-field col s12 m12 l12">
+									<i class="material-icons prefix">person</i> <input name="username" id="username" type="text" class="validate" /> <label
+										for="username">Usuário</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s12 m12 l12">
+									<i class="material-icons prefix">lock</i> <input id="password" name="password" type="password" class="validate" /> <label
+										for="password">Senha</label>
+								</div>
+							</div>
+
+							<p style="position: relative; left: 15px;">
+								<input type="checkbox" name="remember-me" id="remember" checked="checked" /> <label for="remember">Entrar
+									automaticamente?</label>
+							</p>
+
+						</div>
+
+					</form>
+				</div>
+
+				<div class="card-action">
+					<a href="#" onclick="$('#frm-auth').submit();">Entrar</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/login.js}"></script>
+</body>
+</html>

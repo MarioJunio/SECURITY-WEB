@@ -1,0 +1,19 @@
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+
+	<div class="modal-content" layout:fragment="modal-content">
+		<h4 class="js-modal-title">Modal Header</h4>
+		<p class="js-modal-content">A bunch of text</p>
+	</div>
+
+	<div class="modal-footer" layout:fragment="modal-footer">
+
+		<form th:action="${url_excluir}" method="POST">
+			<input id="confirm-records" type="hidden" name="records" value="" />
+			<button type="submit" class="modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+			<a href="" onclick="return false;" class="modal-action modal-close waves-effect waves-green btn-flat">Não</a>
+		</form>
+
+	</div>
+</div>
+

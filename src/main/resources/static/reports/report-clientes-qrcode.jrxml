@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="qrcode-teste" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b8ec67a7-dc4c-4051-8483-bcf9135813bd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="223" splitType="Stretch">
+			<image onErrorType="Blank">
+				<reportElement x="0" y="0" width="200" height="200" uuid="2f048361-59d3-432b-8353-089d9ccc3e88"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode(String.valueOf($F{id}), com.google.zxing.BarcodeFormat.QR_CODE, 400, 400))]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="200" width="200" height="23" uuid="097837ac-f41c-4765-b8d5-1dd3275b7f15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

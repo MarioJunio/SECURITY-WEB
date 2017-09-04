@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<title>Security - Sistema de controle de rotas</title>
+
+<!-- Favicon-->
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+
+<link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+
+<link rel="stylesheet" th:href="@{/css/layout.css}" />
+<link rel="stylesheet" th:href="@{/css/layout-responsive.css}" media="screen and (max-width: 992px)" />
+
+</head>
+
+<body>
+
+	<div layout:insert="@{/fragments/modal-confirm}"></div>
+
+	<div class="container-fluid">
+
+		<nav id="main-bar" class="hoverable navbar-fixed" style="background-color: #F44336;">
+
+			<div class="nav-wrapper row">
+
+				<ul class="left hide-on-med-and-down">
+					<li><a href="#" style="display: inline-block;" data-activates="slide-out" class="button-collapse"><i
+							class="material-icons">menu</i></a></li>
+				</ul>
+
+				<div layout:fragment="search-menu-bar"></div>
+
+				<ul class="right hide-on-med-and-down" layout:fragment="menu-bar">
+					<li><a id="btn-search" href=""><i class="material-icons">search</i></a></li>
+					<li><a href="badges.html"><i class="material-icons">notifications_active</i></a></li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Barra de consulta oculta -->
+		<div th:if="${filtro != null}" class="bar invisible scale-transition scale-out row hoverable z-depth-1">
+
+			<div class="input-field col s1 m1 l1" style="padding: 0; margin: 0;">
+
+				<button type="button" class="search-bar-btn-exit" style="border: transparent; float: left; width: 100px; color: white;">
+					<i class="fa fa-times fa-2x" aria-hidden="true"></i>
+				</button>
+
+			</div>
+
+			<form method="get" th:action="${url_pesquisa}" th:object="${filtro}">
+
+				<input id="field-consulta-hidden" type="hidden" th:value="*{campo}" />
+
+				<div class="col s2 m2 l2">
+					<label>Identificador do filtro</label> <select th:field="*{campo}" id="search-bar-select" class="browser-default">
+					</select>
+				</div>
+
+				<div id="search-field" class="input-field col s8 m8 l7">
+					<input id="field-search" th:field="*{valor}" type="text" class="validate"> <label for="last_name">Digite aqui
+						sua busca...</label>
+				</div>
+
+				<div id="search-radio" class="col offset-s2 offset-m2 offset-l2 s6 m6 l5">
+
+					<p style="margin-top: 30px;">
+						<input name="status" id="ativo" type="radio" value="ativo" th:field="*{status}" /> <label for="ativo"
+							style="margin-right: 30px;">Ativo</label> <input name="status" value="inativo" id="inativo" type="radio"
+							th:field="*{status}" /> <label for="inativo" style="margin-right: 30px;">Inativo</label> <input name="status" id="both"
+							type="radio" value="ambos" th:field="*{status}" /> <label for="both" style="margin-right: 30px;">Geral</label>
+					</p>
+
+				</div>
+
+				<div class="input-field col s2 m2 l2" style="padding: 0; margin: 0;">
+
+					<button type="submit" class="search-bar-btn-ok"
+						style="line-height: 88px; border: transparent; float: right; width: 100px; color: white;">
+						<i class="fa fa-search fa-2x" aria-hidden="true"></i>
+					</button>
+
+				</div>
+
+			</form>
+
+		</div>
+
+		<!-- SideNav Menu -->
+		<ul id="slide-out" class="side-nav">
+
+			<li>
+				<div class="user-view">
+
+					<div class="background">
+						<img height="200px" th:src="@{/img/profile_user_bg2.jpg}">
+					</div>
+
+					<a href="#!user"><img class="circle" width="100px" th:src="@{/img/logo.png}"></a> <span class="white-text"
+						th:if="${#conversions.convert(#dates.format(#calendars.createNow(),'HH'), 'Integer') ge 0 and #conversions.convert(#dates.format(#calendars.createNow(),'HH'), 'Integer') lt 12}">Bom
+						dia</span><span class="white-text"
+						th:if="${#conversions.convert(#dates.format(#calendars.createNow(),'HH'), 'Integer') ge 12 and #conversions.convert(#dates.format(#calendars.createNow(),'HH'), 'Integer') le 18}">Boa
+						tarde</span><span class="white-text" th:if="${#conversions.convert(#dates.format(#calendars.createNow(),'HH'), 'Integer') gt 18}">Boa
+						noite</span> <span class="white-text" style="font-weight: bold;" sec:authentication="principal.username"></span><a
+						class="mj-btn-logout waves-effect waves-light tooltipped" data-position="top" data-delay="10" data-tooltip="Encerrar sessão"
+						href="javascript: $('#frm-logout').submit();"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a>
+					<form id="frm-logout" action="/logout" method="post">
+						<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					</form>
+
+				</div>
+			</li>
+			<li><a class="subheader">Menu navegação</a></li>
+			<li><a class="waves-effect" th:href="@{/}"><i class="fa fa-home fa-2x" aria-hidden="true"></i> Início</a></li>
+
+			<li class="no-padding">
+				<ul class="collapsible collapsible-accordion">
+					<li><a style="padding-left: 31px;" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i>Clientes</a>
+						<div class="collapsible-body">
+							<ul>
+								<li><a class="mj-menu-dropdown" th:href="@{/clientes/novo}"><i class="fa fa-plus" aria-hidden="true"></i> Novo</a></li>
+								<li><a class="mj-menu-dropdown" th:href="@{/clientes/consulta}"><i class="fa fa-search" aria-hidden="true"></i>Consulta</a></li>
+							</ul>
+						</div></li>
+				</ul>
+			</li>
+
+			<li class="no-padding">
+				<ul class="collapsible collapsible-accordion">
+					<li><a style="padding-left: 31px;" class="collapsible-header"><i class="fa fa-users" aria-hidden="true"></i>Funcionários</a>
+						<div class="collapsible-body">
+							<ul>
+								<li><a class="mj-menu-dropdown" th:href="@{/funcionarios/novo}"><i class="fa fa-plus" aria-hidden="true"></i>
+										Novo</a></li>
+								<li><a class="mj-menu-dropdown" th:href="@{/funcionarios/consulta}"><i class="fa fa-search" aria-hidden="true"></i>Consulta</a></li>
+							</ul>
+						</div></li>
+				</ul>
+			</li>
+
+			<li><a th:href="@{/qrcode/clientes}"><i class="fa fa-qrcode fa-2x" aria-hidden="true"></i> QR Code</a></li>
+
+			<li class="no-padding">
+				<ul class="collapsible collapsible-accordion">
+					<li><a style="padding-left: 31px;" class="collapsible-header"><i class="fa fa-files-o" aria-hidden="true"></i>Relatórios</a>
+						<div class="collapsible-body">
+							<ul>
+								<li><a class="mj-menu-dropdown" th:href="@{/relatorio/visitas-cliente}"><i class="fa fa-file-text fa-lg"
+										aria-hidden="true"></i> Visitas por cliente</a></li>
+							</ul>
+						</div></li>
+				</ul>
+			</li>
+		</ul>
+
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.mask.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/layout.js}"></script>
+
+		<div layout:fragment="content"></div>
+	</div>
+
+</body>
+
+</html>

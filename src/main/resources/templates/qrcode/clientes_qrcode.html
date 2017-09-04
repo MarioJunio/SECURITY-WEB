@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<head>
+<title>Clientes | QRCode</title>
+</head>
+
+<body>
+
+	<ul layout:fragment="menu-bar">
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesquisar clientes"
+			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li> -->
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Novo cliente" th:href="@{/clientes/novo}"><i
+				class="material-icons fa fa-user-plus" aria-hidden="true"></i></a></li>
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+	</ul>
+
+	<div layout:fragment="search-menu-bar" class="nav-wrapper col l10" style="display: inline-block; position: relative; left: 20px;">
+		<form>
+			<div class="input-field">
+				<input id="search" placeholder="Clique aqui para pesquisar pelo nome do cliente" type="search" required> <label
+					style="position: relative; top: -82px;" class="label-icon" for="search"><i class="material-icons">search</i></label> <i
+					class="material-icons">close</i>
+			</div>
+		</form>
+	</div>
+
+	<div layout:fragment="content">
+
+		<div class="col s12 m12 l12">
+			<!-- <div class="card-panel grey lighten-4"></div> -->
+		</div>
+
+		<div style="width: 100%; position: fixed; text-align: center; top: 50%; margin-top: -50px;" class="invisible js-loading">
+			<img th:src="@{/img/loading.gif}" alt="Carregando" />
+		</div>
+
+		<div class="row" style="margin-top: 25px;">
+
+			<div class="col s12 m12 l12">
+
+				<table id="tb-clientes" class="highlight bordered responsive-table">
+					<thead>
+						<tr>
+							<th style="width: 5%;"><input type="checkbox" class="filled-in js-cb-gerar-all" id="filled-in-box" /> <label
+								for="filled-in-box"></label></th>
+							<th style="width: 35%;">Nome</th>
+							<th style="width: 25%;">Celular</th>
+							<th style="width: 25%;">CPF/CNPJ</th>
+							<th style="text-align: right;">Status</th>
+						</tr>
+					</thead>
+
+					<tbody>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+
+		<div class="fixed-action-btn">
+
+			<form target="_blank" th:action="@{/qrcode/clientes/download}" class="js-form-gerar" method="post">
+				<input type="hidden" name="ids" class="js-hidden-records" value="" />
+				<button type="button" class="btn-floating btn-large waves-effect waves-light orange darken-2 tooltipped js-btn-gerar scale-transition scale-out"
+					data-position="left" data-delay="50" data-tooltip="Gerar QRCode">
+					<i class="fa fa-qrcode" aria-hidden="true"></i>
+				</button>
+			</form>
+
+		</div>
+
+		<script type="text/javascript" th:src="@{/js/qrcode_clientes.js}"></script>
+	</div>
+
+</body>
+</html>

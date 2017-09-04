@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: web-security
+Implementation-Version: 1.0.0
+Built-By: mariomartins
+Implementation-Vendor-Id: br.com.app
+Build-Jdk: 1.8.0_131
+Implementation-URL: http://projects.spring.io/spring-boot/Security-Web
+ /
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

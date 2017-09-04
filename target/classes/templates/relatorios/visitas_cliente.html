@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<head>
+<title>Relatório | Visitas por cliente</title>
+</head>
+
+<body>
+
+	<div class="modal-footer" layout:fragment="modal-footer">
+		<button type="button" class="modal-action modal-close waves-effect waves-green btn-flat">OK</button>
+	</div>
+
+	<ul layout:fragment="menu-bar">
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesquisar clientes"
+			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li> -->
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Novo cliente" th:href="@{/clientes/novo}"><i
+				class="material-icons fa fa-user-plus" aria-hidden="true"></i></a></li>
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+	</ul>
+
+	<div layout:fragment="content">
+
+		<span th:text="${message}"></span>
+
+		<!-- Tabela de visitas recentes -->
+		<div class="row cadastro-gap">
+			<div class="col s12 m12 l12">
+
+				<div class="card hoverable">
+
+					<form class="js-form-relatorio" target="_blank" method="post" th:action="@{/relatorio/visitas-cliente/download}"
+						th:object="${relatorio}">
+
+						<div class="card-content">
+
+							<span class="card-title" style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-file-text-o"
+								aria-hidden="true"></i> &nbsp; Relatório visitas por cliente
+							</span>
+
+							<div class="row">
+
+								<div class="col s12 m12 l12">
+									<div class="input-field col s12">
+										<i class="fa fa-magic material-icons prefix" aria-hidden="true"></i> <input autocomplete="off" type="text"
+											id="autocomplete-input" class="autocomplete js-autocomplete-cliente" placeholder="Pesquise pelo nome do cliente...">
+										<label for="autocomplete-input">Cliente</label> <input type="hidden" class="js-cliente-id" th:field="*{clienteId}" /> <input
+											type="hidden" class="js-cliente-nome" th:field="*{clienteNome}" />
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row invisible js-confirm-fields">
+
+								<div class="input-field col s4 m4 l4">
+									<input disabled id="disabled1" placeholder="CPF/CNPJ" type="text" class="validate js-confirm1"> <label
+										for="disabled1">CPF/CNPJ</label>
+								</div>
+
+								<div class="input-field col s4 m4 l4">
+									<input disabled id="disabled2" placeholder="Celular" type="text" class="validate js-confirm2"><label
+										for="disabled2">Celular</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s4 m4 l2">
+									<input id="data_inicial" th:field="*{dataInicial}" type="text" class="datepicker" placeholder="Selecione o período">
+									<label for="data_inicial">Data inicial</label>
+								</div>
+
+								<div class="input-field col s4 m4 l2">
+									<input id="data_final" th:field="*{dataFinal}" type="text" class="datepicker" placeholder="Selecione o período">
+									<label for="data_final">Data final</label>
+								</div>
+
+							</div>
+
+							<div class="row">
+
+								<div class="input-field col s4 m4 l4">
+									<select th:field="*{status}">
+										<option value="" selected>Todos</option>
+										<option value="NORMAL">Normal</option>
+										<option value="SUSPEITO">Suspeito</option>
+										<option value="PERIGO">Perigo</option>
+									</select> <label>Status</label>
+								</div>
+
+
+							</div>
+
+						</div>
+						<div class="card-action">
+							<a href="" class="js-gerar-relatorio">Gerar</a>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div class="card-panel hoverable">
+
+					<form method="post" th:action="@{/}">
+
+						<div class="row">
+							<div class="col s12">
+								<div class="row">
+									<div class="input-field col s12">
+										<i class="material-icons prefix">textsms</i> <input type="text" id="autocomplete-input" class="autocomplete"> <label
+											for="autocomplete-input">Autocomplete</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div> -->
+
+
+		<script type="text/javascript" th:src="@{/js/visitas_clientes.js}"></script>
+	</div>
+
+</body>
+</html>

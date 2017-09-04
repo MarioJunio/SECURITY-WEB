@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<head>
+<title>Clientes | Cadastro</title>
+</head>
+
+<body>
+
+	<ul layout:fragment="menu-bar">
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesquisar clientes"
+			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li>
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+	</ul>
+
+	<div layout:fragment="content">
+
+		<form th:action="@{/clientes/salvar}" method="post" th:object="${cliente}">
+
+			<div class="row" th:if="${message}">
+				<div class="frm-message hoverable z-depth-1 offset-m1 offset-l2 col s10 m8 l8">
+					<i class="fa fa-check" aria-hidden="true"></i> <span th:text="${message}"></span>
+				</div>
+			</div>
+
+			<div class="row cadastro-gap">
+				<div class="col offset-m1 offset-l2 s12 m8 l8">
+
+					<div class="card grey lighten-3 hoverable">
+
+						<div class="card-action card-header clearfix">
+							<span class="black-text"><i class="fa fa-user-plus" aria-hidden="true"></i> CADASTRO DO CLIENTE</span>
+						</div>
+
+						<div style="padding: 0px 20px 20px 20px" class="card-content white-text">
+
+							<input type="hidden" th:field="*{id}" />
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s12 m12 l12">
+									<input id="nome" th:field="*{nome}" type="text" required="required" class="validate no-margin-bottom black-text"
+										th:classappend="${#fields.hasErrors('nome')} ? invalid" /> <label for="nome">Nome</label> <span
+										th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-validation">Nome error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s12 m12 l12">
+									<input id="email" th:field="*{email}" type="text" required="required" class="validate no-margin-bottom black-text"
+										th:classappend="${#fields.hasErrors('email')} ? invalid" /> <label for="email">Email</label> <span
+										th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-validation">email error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<p>
+									<input type="radio" value="F" th:field="*{tipo}" id="pf" /> <label for="pf">Pessoa Física</label> <input type="radio"
+										th:field="*{tipo}" value="J" id="pj" /> <label style="margin-left: 50px;" for="pj">Pessoa Jurídica</label>
+								</p>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s8 m6 l4">
+									<input id="cpf" th:field="*{cpf}" type="text" required="required" disabled="disabled"
+										class="validate no-margin-bottom black-text" th:classappend="${#fields.hasErrors('cpf')} ? invalid" /> <label for="cpf">CPF</label>
+									<span th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" class="error-validation">cpf error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s8 m6 l4">
+									<input id="cnpj" th:field="*{cnpj}" type="text" required="required" disabled="disabled"
+										class="validate no-margin-bottom black-text" th:classappend="${#fields.hasErrors('cnpj')} ? invalid" /> <label
+										for="cnpj">CNPJ</label> <span th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" class="error-validation">cnpj
+										error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s11 m3 l2">
+									<input id="telefone1" th:field="*{telefone1}" type="text" required="required"
+										class="validate no-margin-bottom black-text" th:classappend="${#fields.hasErrors('telefone1')} ? invalid" /> <label
+										for="telefone1">Celular</label> <span th:if="${#fields.hasErrors('telefone1')}" th:errors="*{telefone1}"
+										class="error-validation">Telefone1 error</span>
+								</div>
+							</div>
+
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s11 m3 l2">
+									<input id="telefone2" th:field="*{telefone2}" type="text" class="validate no-margin-bottom black-text" /> <label
+										for="telefone2">Telefone(opcional)</label>
+								</div>
+							</div>
+
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s10 m10 l12">
+									<input id="logradouro" th:field="*{logradouro}" type="text" required="required"
+										class="validate no-margin-bottom black-text" th:classappend="${#fields.hasErrors('logradouro')} ? invalid" /> <label
+										for="logradouro">Logradouro</label> <span th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}"
+										class="error-validation">Logradouro error</span>
+								</div>
+							</div>
+
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s10 m3 l2">
+									<input id="numero" th:field="*{numero}" type="text" required="required" class="validate no-margin-bottom black-text"
+										th:classappend="${#fields.hasErrors('numero')} ? invalid" /> <label for="numero">Número</label> <span
+										th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" class="error-validation">numero error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+								<div class="input-field col s10 m10 l12">
+									<input id="bairro" th:field="*{bairro}" type="text" required="required" class="validate no-margin-bottom black-text"
+										th:classappend="${#fields.hasErrors('bairro')} ? invalid" /> <label for="bairro">Bairro</label> <span
+										th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="error-validation">bairro error</span>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="input-field col s11 m3 l2">
+									<input id="cep" th:field="*{cep}" type="text" required="required" class="validate no-margin-bottom black-text"
+										th:classappend="${#fields.hasErrors('cep')} ? invalid" /> <label for="cep">CEP</label> <span
+										th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="error-validation">cep error</span>
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+
+								<div class="col s12 m12 l12">
+
+									<label>Cidade</label> <select class="browser-default" required="required" th:field="*{cidade.id}"
+										th:classappend="${#fields.hasErrors('cidade.id')} ? invalid">
+										<option value="" disabled="disabled" selected="selected">Selecione a cidade</option>
+										<option th:each="cidade : ${cidades}" th:value="${cidade.id}" th:text="${cidade.descricao}">
+                                            </option>
+									</select> <span th:if="${#fields.hasErrors('cidade.id')}" th:errors="*{cidade.id}" class="error-validation">Cidade error</span>
+
+								</div>
+							</div>
+
+							<div class="row no-margin-bottom">
+
+								<p style="padding-left: 10px;">
+									<input type="checkbox" class="filled-in" disabled="disabled" id="clone-cb-ativo" /> <label for="clone-cb-ativo">Ativo?</label>
+								</p>
+
+								<input id="cb-ativo" type="hidden" th:field="*{ativo}" />
+							</div>
+
+						</div>
+
+						<div class="card-action clearfix">
+							<button type="submit" class="waves-effect waves-light btn col l12 light-green darken-1">Salvar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</form>
+
+		<script th:src="@{/js/clientes_cadastro.js}" type="text/javascript"></script>
+
+	</div>
+
+</body>
+</html>

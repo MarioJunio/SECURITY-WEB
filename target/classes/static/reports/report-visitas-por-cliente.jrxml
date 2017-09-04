@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report-visitas-por-cliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61004ed7-255f-4b24-a61c-d99657558dea">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="365"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="FILTRO_CLIENTE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_DATA_INICIO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_DATA_FIM" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_STATUS" class="br.com.security.model.CheckinStatus" isForPrompting="false"/>
+	<parameter name="FILTRO_EMPRESA" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_EMP_ENDERECO" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_EMP_FONE" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="FILTRO_LOGO" class="java.io.InputStream" isForPrompting="false"/>
+	<field name="data" class="java.lang.String">
+		<fieldDescription><![CDATA[data]]></fieldDescription>
+	</field>
+	<field name="horario" class="java.lang.String">
+		<fieldDescription><![CDATA[horario]]></fieldDescription>
+	</field>
+	<field name="empregado" class="java.lang.String">
+		<fieldDescription><![CDATA[empregado]]></fieldDescription>
+	</field>
+	<field name="status" class="br.com.security.model.CheckinStatus">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<fieldDescription><![CDATA[descricao]]></fieldDescription>
+	</field>
+	<variable name="TOTAL_VISITAS" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer(1)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer("0")]]></initialValueExpression>
+	</variable>
+	<group name="Data">
+		<groupExpression><![CDATA[$F{data}]]></groupExpression>
+		<groupHeader>
+			<band height="36">
+				<textField>
+					<reportElement x="5" y="0" width="181" height="20" uuid="f8353a18-bf1e-4e7a-94c7-52935dd08f50"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data: " + $F{data}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="5" y="20" width="58" height="15" uuid="a858613c-f7a2-4616-928d-70c2f0605c49"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Horário]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="63" y="20" width="145" height="15" uuid="5e30a05c-143b-4474-9d32-99148e40fd39"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Funcionário]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="208" y="20" width="347" height="15" uuid="cb71b72f-f84c-454a-9635-600eabc233a7"/>
+					<textElement>
+						<font fontName="Arial" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Observação]]></text>
+				</staticText>
+				<line>
+					<reportElement x="0" y="0" width="1" height="36" uuid="2710ad62-e847-4d99-8755-21f43547ff22"/>
+				</line>
+				<line>
+					<reportElement x="555" y="0" width="1" height="36" uuid="28d96feb-779e-4065-8ff2-dfa69cd441cd"/>
+				</line>
+				<line>
+					<reportElement x="0" y="34" width="555" height="1" uuid="f3d4a59e-3611-4283-a684-57aefb248f43"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="8">
+				<line>
+					<reportElement x="0" y="0" width="1" height="8" uuid="3b545cbc-7531-454b-8663-b233533c312c"/>
+				</line>
+				<line>
+					<reportElement x="555" y="0" width="1" height="8" uuid="37d848f9-06f6-4bc3-a52a-fc2a6514e49d"/>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1" uuid="f979afc9-61b7-4b60-a125-fbb707ce4e7d"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="135" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="114" width="555" height="20" uuid="af26439a-af39-4c56-9f02-cc424cd3741b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório - Visitas por Cliente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="5" width="545" height="20" uuid="c4d53938-1ece-48a9-8818-b0e22198023d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FILTRO_EMPRESA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="66" width="545" height="15" uuid="46fb6514-83cc-474d-8915-2bd91b3da02a"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente: " + (($P{FILTRO_CLIENTE} == null || $P{FILTRO_CLIENTE}.trim().isEmpty()) ? "Todos" : $P{FILTRO_CLIENTE})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="81" width="545" height="15" uuid="14784139-e2ae-46e5-b5a7-47b9ec122922"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Período: " + (($P{FILTRO_DATA_INICIO} == null || $P{FILTRO_DATA_INICIO}.trim().isEmpty()) ? " Geral" : ($P{FILTRO_DATA_INICIO} + " até " + $P{FILTRO_DATA_FIM}))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="96" width="545" height="15" uuid="8c8d1f96-66b9-424d-b27c-e49335551722"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Status: " +  ($P{FILTRO_STATUS} == null ? "Todos" : $P{FILTRO_STATUS})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="461" y="5" width="89" height="20" uuid="ea011cec-f630-42cf-9244-1e3a34b1b7df"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="25" width="545" height="20" uuid="b2d0300e-915d-4292-8961-0c8ab30ef67e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{FILTRO_EMP_ENDERECO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="45" width="545" height="20" uuid="acd82a61-e76a-4b01-87da-8cf97f73d15d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{FILTRO_EMP_FONE}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="5" y="5" width="91" height="60" uuid="80ceb944-0276-4209-a96d-cddfd4730b00"/>
+				<imageExpression><![CDATA[$P{FILTRO_LOGO}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="423" y="109" width="127" height="20" uuid="d1eaed33-8539-4c57-b510-f514d8f7f046"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emissão: " + new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date())]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="135" uuid="efeb7f68-976d-4087-b24a-224600016745"/>
+			</line>
+			<line>
+				<reportElement x="1" y="0" width="554" height="1" uuid="eb08cf8b-85b7-42fd-9a7a-d78696b5d29b"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="135" uuid="059ed9b7-6731-4348-a304-eecbb9d79035"/>
+			</line>
+			<line>
+				<reportElement x="0" y="133" width="555" height="1" uuid="d8cd7ee1-d821-42d9-8979-6198ff9dd05b"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="0" width="58" height="15" uuid="a8c303eb-b5d7-48e5-99c9-8438d5d25e48"/>
+				<textFieldExpression><![CDATA[$F{horario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="145" height="15" uuid="53d62b94-7654-4a71-ab00-e1e107a14bfa"/>
+				<textFieldExpression><![CDATA[$F{empregado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="208" y="0" width="347" height="15" uuid="dca42a18-693d-42ed-a0f8-93c544854d78"/>
+				<textFieldExpression><![CDATA[$F{status} + (($F{descricao} != null && !$F{descricao}.trim().isEmpty()) ? (" - " + $F{descricao}) : "")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="1" height="15" uuid="15cfe416-9ad0-4a1b-9308-56c81f209a1b"/>
+			</line>
+			<line>
+				<reportElement x="555" y="-1" width="1" height="16" uuid="f787e05b-3816-4963-910c-e85b93f25bce"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="1" height="15" uuid="13ef5a45-bdfb-4a1b-8538-903cad5accb5"/>
+			</line>
+			<line>
+				<reportElement x="555" y="0" width="1" height="15" uuid="b356a3b7-1859-4ba8-a614-8e38106e5ccb"/>
+			</line>
+			<line>
+				<reportElement x="1" y="14" width="554" height="1" uuid="b268376b-3039-49ac-811f-e300237b3bf6"/>
+			</line>
+			<textField>
+				<reportElement x="5" y="0" width="202" height="14" uuid="7b7296a1-aea5-4311-b06e-3813daebb203"/>
+				<textElement>
+					<font fontName="Arial" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total de visitas: " + $V{TOTAL_VISITAS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,8 @@
+.map-marker {
+	position: relative;
+	top: 20px;
+}
+
+.hide-on-med-and-down {
+	display: block !important;
+} 

@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layout}">
+<head>
+<title>Security | Sistema de gerenciamento de visitas</title>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzCWPWaEfoaEcsELb4tYy29f4JCHKp5OQ" defer></script>
+<script th:src="@{/js/gmaps.js}"></script>
+</head>
+
+<body>
+
+	<ul layout:fragment="menu-bar">
+		<li><a class="tooltipped js-btn-force-update" data-position="bottom" data-delay="50" data-tooltip="Forçar atualização"><i
+				class="material-icons fa fa-refresh fa-lg" aria-hidden="true"></i></a></li>
+		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificações" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+	</ul>
+
+	<div layout:fragment="content">
+
+		<!-- Widgets -->
+		<div class="row">
+
+			<div class="widget-col col offset-l2 l2">
+
+				<div class="widget-counter light-green clearfix hoverable z-depth-1">
+
+					<div class="widget-ic white-text" style="border-right: 1px solid rgba(0, 0, 0, 0.1);">
+						<i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
+					</div>
+
+					<div class="widget-body"></div>
+					<div class="widget-body-mask">
+						<span class="widget-counter-title count" th:text="${count_checkin}">18</span> <span class="widget-counter-sub-title">VISITAS
+							REALIZADAS</span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="widget-col col offset-l1 l2">
+
+				<div class="widget-counter orange darken-1 clearfix hoverable z-depth-1">
+
+					<div class="widget-ic white-text" style="border-right: 1px solid rgba(0, 0, 0, 0.1);">
+						<i style="position: relative; top: 8px;" class="fa fa-users fa-2x" aria-hidden="true"></i>
+					</div>
+
+					<div class="widget-body"></div>
+					<div class="widget-body-mask">
+						<span class="widget-counter-title count" th:text="${count_clientes}">18</span> <span class="widget-counter-sub-title">CLIENTES</span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="widget-col col offset-l1 l2">
+				<div class="widget-counter blue lighten-1 clearfix hoverable z-depth-1">
+
+					<div class="widget-ic white-text" style="border-right: 1px solid rgba(0, 0, 0, 0.1);">
+						<i style="position: relative; top: 8px;" class="fa fa-users fa-2x" aria-hidden="true"></i>
+					</div>
+
+					<div class="widget-body"></div>
+					<div class="widget-body-mask">
+						<span class="widget-counter-title count" th:text="${count_funcionarios}">18</span> <span class="widget-counter-sub-title">FUNCIONÁRIOS</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Google maps v3 -->
+		<div class="row">
+			<div id="map" style="height: 15em;"></div>
+		</div>
+
+		<!-- Tabela de visitas recentes -->
+		<div class="row">
+			<div class="col s12 m12 l12">
+
+				<div class="card-panel hoverable">
+
+					<table class="bordered highlight responsive-table js-tb-checkins">
+						<caption style="text-align: left; font-size: 150%; font-weight: bold; border-bottom: 3px solid black;">Últimas
+							visitas realizadas</caption>
+						<thead>
+							<tr>
+								<th style="width: 33%;">Empregado</th>
+								<th style="width: 33%;">Cliente</th>
+								<th style="width: 15%;">Data</th>
+								<th style="width: 8%;">Status</th>
+								<th style="width: 10%;">Localização</th>
+							</tr>
+						</thead>
+
+						<tbody>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript" th:src="@{/js/app.js}"></script>
+
+	</div>
+
+</body>
+</html>
