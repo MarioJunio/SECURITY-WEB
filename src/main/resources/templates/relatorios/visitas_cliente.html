@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
 <title>Relatório | Visitas por cliente</title>
 </head>
@@ -15,13 +15,16 @@
 			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li> -->
 		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Novo cliente" th:href="@{/clientes/novo}"><i
 				class="material-icons fa fa-user-plus" aria-hidden="true"></i></a></li>
-		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
-				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li> -->
 	</ul>
 
 	<div layout:fragment="content">
 
-		<span th:text="${message}"></span>
+
+		<span th:unless="${#strings.isEmpty(message)}" class="message-warning"> <i class="fa fa-exclamation-triangle"
+			aria-hidden="true" style="margin-right: 10px;"></i> <span th:text="${message}"></span>
+		</span>
 
 		<!-- Tabela de visitas recentes -->
 		<div class="row cadastro-gap">
@@ -38,7 +41,7 @@
 								aria-hidden="true"></i> &nbsp; Relatório visitas por cliente
 							</span>
 
-							<div class="row">
+							<div class="row" style="margin-top: 40px;">
 
 								<div class="col s12 m12 l12">
 									<div class="input-field col s12">
@@ -66,8 +69,9 @@
 
 							<div class="row">
 								<div class="input-field col s4 m4 l2">
-									<input id="data_inicial" th:field="*{dataInicial}" type="text" class="datepicker" placeholder="Selecione o período">
-									<label for="data_inicial">Data inicial</label>
+									<i class="fa fa-calendar material-icons prefix" aria-hidden="true"></i> <input id="data_inicial"
+										th:field="*{dataInicial}" type="text" class="datepicker" placeholder="Selecione o período"> <label
+										for="data_inicial">Data inicial</label>
 								</div>
 
 								<div class="input-field col s4 m4 l2">
@@ -80,7 +84,7 @@
 							<div class="row">
 
 								<div class="input-field col s4 m4 l4">
-									<select th:field="*{status}">
+									<i class="fa fa-ellipsis-v material-icons prefix" aria-hidden="true"></i> <select th:field="*{status}">
 										<option value="" selected>Todos</option>
 										<option value="NORMAL">Normal</option>
 										<option value="SUSPEITO">Suspeito</option>
@@ -100,25 +104,6 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- <div class="card-panel hoverable">
-
-					<form method="post" th:action="@{/}">
-
-						<div class="row">
-							<div class="col s12">
-								<div class="row">
-									<div class="input-field col s12">
-										<i class="material-icons prefix">textsms</i> <input type="text" id="autocomplete-input" class="autocomplete"> <label
-											for="autocomplete-input">Autocomplete</label>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</form>
-				</div> -->
-
 
 		<script type="text/javascript" th:src="@{/js/visitas_clientes.js}"></script>
 	</div>

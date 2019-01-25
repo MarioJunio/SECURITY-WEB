@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import br.com.security.model.Checkin;
 import br.com.security.repository.CheckinRepository;
 import br.com.security.repository.ClienteRepository;
 import br.com.security.repository.EmpregadoRepository;
+import br.com.security.wrapper.CheckinView;
 
 @Controller
 public class AppController {
@@ -30,33 +30,32 @@ public class AppController {
 	@GetMapping("/")
 	public String inicio(Model model) {
 
-		model.addAttribute("count_clientes", clienteRepository.count());
+		model.addAttribute("count_clientes", clienteRepository.countNonExcluded());
 		model.addAttribute("count_funcionarios", empregadoRepository.count());
 		model.addAttribute("count_checkin", checkinRepository.count());
 
-		return "/app";
+		return "app";
 	}
 
 	@GetMapping("/auth")
 	public String auth() {
-		return "/auth/login";
+		return "auth/login";
+	}
+
+	@GetMapping("/download-apps")
+	public String downloadMobileApps() {
+		return "download/index";
 	}
 
 	/**
 	 * WebService interno para buscar os checkin, e retorna-los em um array JSON
 	 */
 	@GetMapping("/app/checkins")
-	public ResponseEntity<List<Checkin>> todosCheckin() {
+	public ResponseEntity<List<CheckinView>> todosCheckin() {
 
 		// foi criado o método abaixo para limitar o número de registros buscados,
 		// usando a nova interface da versão do spring boot jpa
-		return new ResponseEntity<List<Checkin>>(checkinRepository.findAllOrdered(new PageRequest(0, 20)),
-				HttpStatus.OK);
+		return new ResponseEntity<List<CheckinView>>(checkinRepository.findAllOrdered(new PageRequest(0, 20)), HttpStatus.OK);
 	}
-	
-	@GetMapping("/mapas")
-	public String mapas() {
-		return "/maps/maps";
-	}
-	
+
 }

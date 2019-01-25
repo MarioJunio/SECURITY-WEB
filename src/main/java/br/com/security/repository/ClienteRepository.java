@@ -1,5 +1,6 @@
 package br.com.security.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -40,12 +41,26 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	boolean celularAlreadyExists(@Param("telefone1") String telefone1, @Param("id") Long exceptId);
 
 	List<Cliente> findByAtivo(boolean status);
-	
-	List<Cliente> findByNomeStartingWithOrderByNomeAsc(String nome);
+
+	@Query("from Cliente a where a.nome like :nome% and a.excluido = false order by a.nome asc")
+	List<Cliente> find(@Param("nome") String nome);
+
+	/*
+	 * @Transactional
+	 * 
+	 * @Modifying
+	 * 
+	 * @Query("delete from Cliente a where a.id in :selected") void
+	 * deleteSelected(@Param("selected") List<Long> ids);
+	 */
 
 	@Transactional
 	@Modifying
-	@Query("delete from Cliente a where a.id in :selected")
-	void deleteSelected(@Param("selected") List<Long> ids);
+	@Query("update Cliente a set a.excluido = :excluido, a.dataAlteracao = :data_alteracao where a.id in :selected")
+	void deleteSelected(@Param("excluido") boolean excluido, @Param("data_alteracao") Date dataAlteracao,
+			@Param("selected") List<Long> ids);
+	
+	@Query("select count(a.id) from Cliente a where a.excluido = false")
+	Long countNonExcluded(); 
 
 }

@@ -25,7 +25,7 @@ import br.com.security.util.AppUtils;
 @RequestMapping("/qrcode")
 public class QrCodeController {
 
-	public static final String CLIENTES_VIEW = "/qrcode/clientes_qrcode";
+	public static final String CLIENTES_VIEW = "qrcode/clientes_qrcode";
 
 	@Autowired
 	public ClienteRepository clienteRepository;
@@ -37,8 +37,7 @@ public class QrCodeController {
 
 	@GetMapping("/clientes/buscar")
 	public ResponseEntity<List<Cliente>> buscar(@Param("nome") String nome) {
-		List<Cliente> clientes = clienteRepository
-				.findByNomeStartingWithOrderByNomeAsc(Optional.ofNullable(nome).orElse(""));
+		List<Cliente> clientes = clienteRepository.find(Optional.ofNullable(nome).orElse(""));
 		return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
 	}
 
@@ -57,7 +56,8 @@ public class QrCodeController {
 				String id = AppUtils.md5(Long.parseLong(token.substring(0, index)));
 				String nome = token.substring(index + 1, token.length());
 
-				lista.add(new ClienteQrCode(id, nome));
+				lista.add(new ClienteQrCode(id,
+						String.valueOf(ClienteQrCode.getCode(Long.parseLong(token.substring(0, index)))), nome));
 			}
 
 			Reports.generate(Reports.CLIENTES_QRCODE, response.getOutputStream(), null, lista);

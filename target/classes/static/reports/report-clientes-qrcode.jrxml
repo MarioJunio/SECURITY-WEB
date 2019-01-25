@@ -12,19 +12,29 @@
 	<field name="nome" class="java.lang.String">
 		<fieldDescription><![CDATA[nome]]></fieldDescription>
 	</field>
+	<field name="code" class="java.lang.String">
+		<fieldDescription><![CDATA[code]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
 		<band height="223" splitType="Stretch">
 			<image onErrorType="Blank">
-				<reportElement x="0" y="0" width="200" height="200" uuid="2f048361-59d3-432b-8353-089d9ccc3e88"/>
+				<reportElement x="0" y="1" width="215" height="209" uuid="2f048361-59d3-432b-8353-089d9ccc3e88"/>
 				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage(new com.google.zxing.qrcode.QRCodeWriter().encode(String.valueOf($F{id}), com.google.zxing.BarcodeFormat.QR_CODE, 400, 400))]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="0" y="200" width="200" height="23" uuid="097837ac-f41c-4765-b8d5-1dd3275b7f15"/>
+				<reportElement x="0" y="187" width="215" height="23" uuid="097837ac-f41c-4765-b8d5-1dd3275b7f15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="7" width="215" height="20" uuid="204c1b13-3574-4956-acd0-216688d7f50b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{code}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

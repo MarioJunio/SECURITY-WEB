@@ -17,15 +17,14 @@ import br.com.security.repository.ClienteRepository;
 @Controller
 @RequestMapping("/ajax")
 public class AjaxController {
-	
+
 	@Autowired
 	public ClienteRepository clienteRepository;
 
 	@GetMapping("/clientes/buscar")
 	public ResponseEntity<List<Cliente>> buscar(@Param("nome") String nome) {
-		List<Cliente> clientes = clienteRepository
-				.findByNomeStartingWithOrderByNomeAsc(Optional.ofNullable(nome).orElse(""));
+		List<Cliente> clientes = clienteRepository.find(Optional.ofNullable(nome).orElse(""));
 		return new ResponseEntity<List<Cliente>>(clientes, HttpStatus.OK);
 	}
-	
+
 }

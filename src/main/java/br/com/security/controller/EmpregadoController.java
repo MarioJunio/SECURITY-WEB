@@ -6,7 +6,6 @@ import br.com.security.repository.CidadeRepository;
 import br.com.security.repository.EmpregadoRepository;
 import br.com.security.repository.IEmpregadoRepository;
 import br.com.security.util.AppUtils;
-import br.com.security.util.Debug;
 import br.com.security.wrapper.CidadeView;
 import br.com.security.wrapper.CustomPage;
 import br.com.security.wrapper.PageWrapper;
@@ -35,8 +34,8 @@ import java.util.List;
 @RequestMapping("/funcionarios/")
 public class EmpregadoController {
 
-	public final String CADASTRO_VIEW = "/empregado/cadastro";
-	public final String CONSULTA_VIEW = "/empregado/consulta";
+	public final String CADASTRO_VIEW = "empregado/cadastro";
+	public final String CONSULTA_VIEW = "empregado/consulta";
 
 	public final String PARAM_CIDADES = "cidades";
 	public final String PARAM_FILTRO = "filtro";
@@ -86,8 +85,6 @@ public class EmpregadoController {
 		mv.addObject(PARAM_URL_PESQUISA, getParamUrlPesquisaValue());
 		mv.addObject(PARAM_URL_EXCLUIR, getParamUrlExcluirValue());
 
-		Debug.log("Salvar", empregado.toString());
-
 		if (errors.hasErrors()) {
 
 			if (empregado.getId() == null) {
@@ -109,13 +106,16 @@ public class EmpregadoController {
 			return mv;
 		}
 
+		// remove a mascara dos telefones
+		empregado.setTelefone1(empregado.getTelefone1() != null ? AppUtils.onlyNumbers(empregado.getTelefone1()) : "");
+		empregado.setTelefone2(empregado.getTelefone2() != null ? AppUtils.onlyNumbers(empregado.getTelefone2()) : "");
+
 		if (empregado.getId() == null)
 			empregadoRepository.save(empregado);
 		else
-			empregadoRepository.edit(empregado.getNome(), empregado.getLogin(), empregado.getTelefone1(),
-					empregado.getTelefone2(), empregado.getLogradouro(), empregado.getNumero(), empregado.getBairro(),
-					empregado.getCep(), empregado.getCidade(), empregado.isAtivo(), empregado.getDataAlteracao(),
-					empregado.getId());
+			empregadoRepository.edit(empregado.getNome(), empregado.getLogin(), empregado.getTelefone1(), empregado.getTelefone2(),
+					empregado.getLogradouro(), empregado.getNumero(), empregado.getBairro(), empregado.getCep(), empregado.getCidade(),
+					empregado.isAtivo(), empregado.getDataAlteracao(), empregado.getId());
 
 		attributes.addFlashAttribute("message", "Funcionário salvo com sucesso!");
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
 <title>Funcionários | Consulta</title>
 </head>
@@ -15,8 +15,8 @@
 				class="material-icons fa fa-filter" aria-hidden="true"></i></a></li>
 		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Novo funcionário"
 			th:href="@{/funcionarios/novo}"><i class="material-icons fa fa-user-plus" aria-hidden="true"></i></a></li>
-		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificações" href="badges.html"><i
-				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificações" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li> -->
 	</ul>
 
 	<div layout:fragment="content">
@@ -26,6 +26,15 @@
 				aria-hidden="true"></i></a>
 		</div>
 
+		<div th:classappend="${#lists.isEmpty(empregados)} ? 'visible' : 'invisible'" class="mj-tb-consulta row">
+		
+			<div class="js-no-records-found col s12 m12 l12">
+				<img alt="Nenhum registro encontrado" th:src="@{/img/ic_no_records.png}" class="ic-no-records" /> <span
+					class="js-filter-expression no-records-found-text">Nenhum funcionário encontrado</span>
+			</div>
+			
+		</div>
+
 		<div th:classappend="${not #lists.isEmpty(empregados)} ? 'visible' : 'invisible'" class="mj-tb-consulta">
 
 			<table id="consulta" class="bordered highlight responsive-table">
@@ -33,7 +42,7 @@
 					<tr>
 						<th style="width: 2%;"></th>
 						<th data="<domain>.nome" style="width: 20%;">Nome</th>
-						<th data="<domain>.login" style="width: 10%;">Celular</th>
+						<th data="<domain>.login" style="width: 10%;">Login</th>
 						<th data="<domain>.logradouro+' '+<domain>.numero+', '+<domain>.bairro" style="width: 25%;">Endereço</th>
 						<th data="<domain>.cidade.nome+' - '+<domain>.cidade.uf" style="width: 15%;">Cidade</th>
 						<th data="<domain>.telefone1" style="width: 20%;">Celular</th>
@@ -44,8 +53,8 @@
 
 				<tbody>
 					<tr th:each="e,iterationStatus : ${empregados}">
-						<td><input type="checkbox" th:data="${e.id}" th:unless="${e.excluir}" th:id="${e.id + '_box'}" class="filled-in cb-delete" /> <label style="position: relative; top: 3px;"
-							th:for="${e.id + '_box'}"></label></td>
+						<td><input type="checkbox" th:data="${e.id}" th:unless="${e.excluir}" th:id="${e.id + '_box'}"
+							class="filled-in cb-delete" /> <label style="position: relative; top: 3px;" th:for="${e.id + '_box'}"></label></td>
 						<td th:text="${e.nome}"></td>
 						<td th:text="${e.login}"></td>
 						<td th:text="${e.logradouro + ' ' + e.numero + ', ' + e.bairro}"></td>
@@ -64,9 +73,10 @@
 				<div class="pagination">
 					<p>
 						<!-- Mostrando <span th:text="${page.size * (page.number-1) + 1}"></span> -->
-						<span th:text="${page.lastPage ? page.totalElements : page.size *(page.number-1) + page.size}> ${page.totalElements}
-							? ${page.totalElements} : ${page.lastPage ? page.totalElements : page.size * (page.number-1) + page.size}" ></span> de <span
-							th:text="${page.totalElements}"></span> funcionários
+						<span
+							th:text="${page.lastPage ? page.totalElements : page.size *(page.number-1) + page.size}> ${page.totalElements}
+							? ${page.totalElements} : ${page.lastPage ? page.totalElements : page.size * (page.number-1) + page.size}"></span>
+						de <span th:text="${page.totalElements}"></span> funcionários
 					</p>
 				</div>
 			</div>
@@ -74,8 +84,7 @@
 			<ul class="pagination">
 
 				<li class="waves-effect" th:classappend="${page.hasPreviousPage}? '' : 'disabled'"><a onclick="return false;"
-					th:if='${not page.hasPreviousPage}' href=""><i class="material-icons">chevron_left</i> </a><a
-					th:if='${page.hasPreviousPage}'
+					th:if='${not page.hasPreviousPage}' href=""><i class="material-icons">chevron_left</i> </a><a th:if='${page.hasPreviousPage}'
 					th:href='@{${page.url}(campo=${filtro.campo},valor=${filtro.valor},status=${filtro.status},page=${page.number-2},size=${page.size})}'
 					title='Página anterior'><i class="material-icons">chevron_left</i></a></li>
 

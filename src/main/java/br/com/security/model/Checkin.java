@@ -31,6 +31,7 @@ public class Checkin implements Serializable {
 	private double longitude;
 	private CheckinStatus status;
 	private String descricao;
+	private Long timeSync;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,7 +64,7 @@ public class Checkin implements Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy hh:mm:ss")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column
 	public Date getData() {
 		return data;
@@ -109,6 +110,15 @@ public class Checkin implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Column(name = "time_sync")
+	public Long getTimeSync() {
+		return timeSync;
+	}
+
+	public void setTimeSync(Long timeSync) {
+		this.timeSync = timeSync;
 	}
 
 	@Override

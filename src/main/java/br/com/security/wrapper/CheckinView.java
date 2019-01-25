@@ -19,8 +19,7 @@ public class CheckinView {
 		super();
 	}
 
-	public CheckinView(String empregado, String cliente, Date data, CheckinStatus status, double latitude,
-			double longitude, String descricao) {
+	public CheckinView(String empregado, String cliente, Date data, CheckinStatus status, double latitude, double longitude, String descricao) {
 		super();
 		this.empregado = empregado;
 		this.cliente = cliente;
@@ -47,7 +46,7 @@ public class CheckinView {
 		this.cliente = cliente;
 	}
 
-	@JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss", timezone = "America/Sao_Paulo")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss", timezone = "GMT-3")
 	public Date getData() {
 		return data;
 	}

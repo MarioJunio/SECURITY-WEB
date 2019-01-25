@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report-visitas-por-cliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61004ed7-255f-4b24-a61c-d99657558dea">
-	<property name="ireport.zoom" value="2.0"/>
-	<property name="ireport.x" value="365"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="39"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="FILTRO_CLIENTE" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="FILTRO_DATA_INICIO" class="java.lang.String" isForPrompting="false"/>
@@ -63,7 +63,7 @@
 					<text><![CDATA[Observação]]></text>
 				</staticText>
 				<line>
-					<reportElement x="0" y="0" width="1" height="36" uuid="2710ad62-e847-4d99-8755-21f43547ff22"/>
+					<reportElement x="0" y="-1" width="1" height="37" uuid="2710ad62-e847-4d99-8755-21f43547ff22"/>
 				</line>
 				<line>
 					<reportElement x="555" y="0" width="1" height="36" uuid="28d96feb-779e-4065-8ff2-dfa69cd441cd"/>
@@ -91,9 +91,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="135" splitType="Stretch">
+		<band height="175" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="114" width="555" height="20" uuid="af26439a-af39-4c56-9f02-cc424cd3741b"/>
+				<reportElement x="1" y="154" width="555" height="20" uuid="af26439a-af39-4c56-9f02-cc424cd3741b"/>
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
@@ -149,24 +149,94 @@
 				<imageExpression><![CDATA[$P{FILTRO_LOGO}]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement x="423" y="109" width="127" height="20" uuid="d1eaed33-8539-4c57-b510-f514d8f7f046"/>
+				<reportElement x="423" y="152" width="127" height="16" uuid="d1eaed33-8539-4c57-b510-f514d8f7f046"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font fontName="Arial" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Emissão: " + new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date())]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Emissão: " + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date())]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="0" width="1" height="135" uuid="efeb7f68-976d-4087-b24a-224600016745"/>
+				<reportElement x="0" y="0" width="1" height="174" uuid="efeb7f68-976d-4087-b24a-224600016745"/>
 			</line>
 			<line>
 				<reportElement x="1" y="0" width="554" height="1" uuid="eb08cf8b-85b7-42fd-9a7a-d78696b5d29b"/>
 			</line>
 			<line>
-				<reportElement x="555" y="0" width="1" height="135" uuid="059ed9b7-6731-4348-a304-eecbb9d79035"/>
+				<reportElement x="555" y="1" width="1" height="174" uuid="059ed9b7-6731-4348-a304-eecbb9d79035"/>
 			</line>
 			<line>
-				<reportElement x="0" y="133" width="555" height="1" uuid="d8cd7ee1-d821-42d9-8979-6198ff9dd05b"/>
+				<reportElement x="1" y="174" width="555" height="1" uuid="d8cd7ee1-d821-42d9-8979-6198ff9dd05b"/>
 			</line>
+			<staticText>
+				<reportElement x="94" y="114" width="100" height="15" uuid="6ab6822a-99ad-4619-af79-83cdaacb1a62"/>
+				<text><![CDATA[Portão verificado !?]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="77" y="114" width="12" height="15" uuid="69e7eb74-a35d-41e4-ae0b-26488f5782cd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="77" y="114" width="12" height="15" uuid="3e2f1559-45b5-452e-b7ea-dee6b421b464"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="94" y="132" width="100" height="15" uuid="e48f53b5-4956-4e31-a551-d3f401b5ddf4"/>
+				<text><![CDATA[Cerca checada !?]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="77" y="132" width="12" height="15" uuid="b9a700e7-cc55-4e72-807b-336ce78453df"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="77" y="132" width="12" height="15" uuid="c00db89f-4fa4-43ff-ad5a-1be54abe6fa6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="114" width="100" height="15" uuid="1eddd75e-f9d8-4c09-bfaf-fc2b37c70132"/>
+				<text><![CDATA[Parede verificada !?]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="222" y="114" width="12" height="15" uuid="b5be0615-9d40-4141-9858-81244850795a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="222" y="114" width="12" height="15" uuid="512f9d5e-4a24-4310-a5f4-cdd7178c28b0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="132" width="100" height="15" uuid="e3d7683b-fcac-4168-aadd-87addeddeaf7"/>
+				<text><![CDATA[Iluminação checada !?]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="222" y="132" width="12" height="15" uuid="87024743-e0e9-4911-91de-5a8a8b8a7dea"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="222" y="132" width="12" height="15" uuid="41c357c7-7d04-443b-8c32-92b01f1685ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="114" width="100" height="15" uuid="3030a644-d777-4b02-b53f-8df3ddc8e8c3"/>
+				<text><![CDATA[Veículo suspeito !?]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="366" y="114" width="12" height="15" uuid="d324c9d6-3edf-49ba-832b-c2729cd226dd"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="366" y="114" width="12" height="15" uuid="0ac359cf-4b03-4457-a25d-894a80bff101"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>

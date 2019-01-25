@@ -1,16 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
 <title>Clientes | Cadastro</title>
 </head>
 
 <body>
 
+	<div layout:fragment="modal-content">
+		<h4>Confirmação</h4>
+		<p>Você tem certeza que deseja reiniciar a localização desse cliente?</p>
+	</div>
+
+	<div layout:fragment="modal-footer">
+		<button type="submit" class="js-btn-yes modal-action modal-close waves-effect waves-green btn-flat">Sim</button>
+		<a href="" onclick="return false;" class="js-btn-no modal-action modal-close waves-effect waves-green btn-flat">Não</a>
+	</div>
+
 	<ul layout:fragment="menu-bar">
 		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesquisar clientes"
 			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li>
-		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
-				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li> -->
 	</ul>
 
 	<div layout:fragment="content">
@@ -149,6 +159,22 @@
 								</p>
 
 								<input id="cb-ativo" type="hidden" th:field="*{ativo}" />
+							</div>
+
+							<div class="row no-margin-bottom" style="text-align: center;">
+								<a class="js-btn-reset-location btn-large waves-effect waves-light red modal-trigger" href="#modal1"
+									th:classappend="*{latitude == null or longitude == null ? 'disabled' : ''}"><i class="fa fa-map-marker fa-2x"
+									style="color: white; position: relative; right: 10px;" aria-hidden="true"></i> <span
+									style="position: relative; bottom: 2px;">Reiniciar localização</span></a>
+							</div>
+
+							<div class="row no-margin-bottom invisible">
+
+								<p style="padding-left: 10px;">
+									<input id="latitude" th:field="*{latitude}" type="text" class="no-margin-bottom black-text" /> <input id="longitude"
+										th:field="*{longitude}" type="text" class="no-margin-bottom black-text" />
+								</p>
+
 							</div>
 
 						</div>

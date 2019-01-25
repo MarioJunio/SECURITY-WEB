@@ -65,8 +65,8 @@ public class VisitaCliente {
 
 	@Override
 	public String toString() {
-		return "VisitaCliente [data=" + data + ", horario=" + horario + ", empregado=" + empregado + ", status="
-				+ status + ", descricao=" + descricao + "]";
+		return "VisitaCliente [data=" + data + ", horario=" + horario + ", empregado=" + empregado + ", status=" + status + ", descricao=" + descricao
+				+ "]";
 	}
 
 }

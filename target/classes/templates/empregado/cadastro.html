@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
 <title>Empregados | Cadastro</title>
 </head>
@@ -9,8 +9,8 @@
 	<ul layout:fragment="menu-bar">
 		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pesquisar funcionários"
 			th:href="@{/funcionarios/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li>
-		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
-				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li> -->
 	</ul>
 
 	<div layout:fragment="content">

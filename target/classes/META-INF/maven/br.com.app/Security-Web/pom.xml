@@ -25,6 +25,7 @@
 		<thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
 		<thymeleaf-layout-dialect.version>2.0.4</thymeleaf-layout-dialect.version>
 		<thymeleaf-extras-springsecurity4.version>3.0.0.RELEASE</thymeleaf-extras-springsecurity4.version>
+		<start-class>br.com.security.WebSecurityApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -108,9 +109,65 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>br.com.security.WebSecurityApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
 
+	<!-- <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>1.5.6.RELEASE</version>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>br.com.security.WebSecurityApplication</mainClass>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>br.com.security</groupId>
+				<artifactId>webapp-security</artifactId>
+				<version>0.7.8-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<id>security-initialize</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>security</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build> -->
+
+	<!-- <build> <plugins> <plugin> <artifactId>maven-assembly-plugin</artifactId> 
+		<configuration> <archive> <manifest> <mainClass>br.com.security.WebSecurityApplication</mainClass> 
+		</manifest> </archive> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
+		</descriptorRefs> </configuration> </plugin> </plugins> </build> -->
 
 </project>

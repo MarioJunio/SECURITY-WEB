@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="pt_BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Security | Aplicativo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Security, Aplicativo, App, Security Mobile, Security App" />
+<link th:href="@{/public/css/bootstrap.css}" rel='stylesheet' type='text/css' />
+<link th:href="@{/public/css/style.css}" rel='stylesheet' type='text/css' />
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css' />
+<script type="text/javascript" th:src="@{/public/js/jquery-1.11.0.min.js}"></script>
+</head>
+<body>
+
+	<form th:action="@{/public/files/app-release.apk}" method="get">
+		<input name="submit" class="google" type="submit" value="Funcionario">
+	</form>
+
+</body>
+</html>

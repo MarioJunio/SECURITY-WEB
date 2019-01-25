@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +36,7 @@ import net.sf.jasperreports.engine.JRException;
 @RequestMapping("/relatorio/")
 public class RelatorioVisitasClienteController {
 
-	public static final String VISITAS_CLIENTE_VIEW = "/relatorios/visitas_cliente";
+	public static final String VISITAS_CLIENTE_VIEW = "relatorios/visitas_cliente";
 
 	@Autowired
 	private CheckinRepository checkinRepository;
@@ -51,6 +54,36 @@ public class RelatorioVisitasClienteController {
 	public String gerarClientes(HttpServletResponse response, Model model, FiltroRelatorioVisitasCliente filtro,
 			RedirectAttributes redirect) throws Exception {
 
+		if (filtro.getDataInicial() != null && filtro.getDataFinal() != null) {
+
+			Calendar dataInicial = new GregorianCalendar();
+			dataInicial.setTime(filtro.getDataInicial());
+			dataInicial.set(Calendar.HOUR_OF_DAY, 0);
+			dataInicial.set(Calendar.MINUTE, 0);
+			dataInicial.set(Calendar.SECOND, 0);
+			dataInicial.set(Calendar.MILLISECOND, 0);
+			filtro.setDataInicial(dataInicial.getTime());
+
+			Calendar dataFinal = new GregorianCalendar();
+			dataFinal.setTime(filtro.getDataFinal());
+			dataFinal.set(Calendar.HOUR_OF_DAY, 23);
+			dataFinal.set(Calendar.MINUTE, 59);
+			dataFinal.set(Calendar.SECOND, 59);
+			dataFinal.set(Calendar.MILLISECOND, 999);
+			filtro.setDataFinal(dataFinal.getTime());
+		} else {
+			Calendar dataFinal = new GregorianCalendar();
+			dataFinal.set(2099, 12, 30, 23, 59, 59);
+			filtro.setDataFinal(dataFinal.getTime());
+			
+			Calendar dataInicial = new GregorianCalendar();
+			dataInicial.set(2000, 01, 01, 0, 0, 0);
+			filtro.setDataInicial(dataInicial.getTime());
+		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		System.out.println(format.format(filtro.getDataInicial()) + " ate " + format.format(filtro.getDataFinal()));
+		
 		List<CheckinStatus> status = Arrays
 				.asList(new CheckinStatus[] { filtro.getStatus() != null ? filtro.getStatus() : CheckinStatus.NORMAL,
 						CheckinStatus.SUSPEITO, CheckinStatus.PERIGO });
@@ -99,7 +132,7 @@ public class RelatorioVisitasClienteController {
 		params.put("FILTRO_EMPRESA", "Security - Sistemas de Segurança");
 		params.put("FILTRO_EMP_ENDERECO", "Av. Doná Clara, 177 - Centro, Monte Carmelo - MG, 38500-000");
 		params.put("FILTRO_EMP_FONE", "(34) 3819-4644");
-		params.put("FILTRO_LOGO", new FileInputStream(new ClassPathResource("static/img/logo.png").getFile()));
+		params.put("FILTRO_LOGO", new ClassPathResource("static/img/logo.png").getInputStream());
 
 		Reports.generate(Reports.VISITAS_CLIENTE, out, params, list);
 

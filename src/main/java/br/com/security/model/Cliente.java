@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -39,6 +40,8 @@ public class Cliente implements Serializable {
 	private boolean ativo;
 	private Date dataAlteracao;
 	private int tmpCodigoValidacao;
+	private Double latitude, longitude;
+	private boolean excluido;
 	private long excluir;
 
 	public Cliente() {
@@ -65,6 +68,31 @@ public class Cliente implements Serializable {
 		this.ativo = ativo;
 		this.dataAlteracao = dataAlteracao;
 		this.tmpCodigoValidacao = tmpCodigoValidacao;
+		this.excluir = excluir;
+	}
+
+	public Cliente(Long id, String nome, String email, String tipo, String cpf, String cnpj, String telefone1,
+			String telefone2, String logradouro, int numero, String bairro, String cep, Cidade cidade, boolean ativo,
+			Date dataAlteracao, int tmpCodigoValidacao, Double latitude, Double longitude, long excluir) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.tipo = tipo;
+		this.cpf = cpf;
+		this.cnpj = cnpj;
+		this.telefone1 = telefone1;
+		this.telefone2 = telefone2;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.ativo = ativo;
+		this.dataAlteracao = dataAlteracao;
+		this.tmpCodigoValidacao = tmpCodigoValidacao;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.excluir = excluir;
 	}
 
@@ -107,7 +135,7 @@ public class Cliente implements Serializable {
 		this.tipo = tipo;
 	}
 
-	@Column(unique = true, length = 15)
+	@Column(length = 15)
 	public String getCpf() {
 		return cpf;
 	}
@@ -220,6 +248,33 @@ public class Cliente implements Serializable {
 
 	public void setTmpCodigoValidacao(int tmpCodigoValidacao) {
 		this.tmpCodigoValidacao = tmpCodigoValidacao;
+	}
+
+	@Column
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+
+	@Column
+	public Double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+
+	@ColumnDefault("false")
+	public boolean isExcluido() {
+		return excluido;
+	}
+
+	public void setExcluido(boolean excluido) {
+		this.excluido = excluido;
 	}
 
 	@Transient

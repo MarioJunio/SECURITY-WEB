@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layout}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
 <head>
 <title>Clientes | QRCode</title>
 </head>
@@ -11,8 +11,8 @@
 			th:href="@{/clientes/consulta}"><i class="material-icons fa fa-search" aria-hidden="true"></i></a></li> -->
 		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Novo cliente" th:href="@{/clientes/novo}"><i
 				class="material-icons fa fa-user-plus" aria-hidden="true"></i></a></li>
-		<li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
-				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li>
+		<!-- <li><a class="tooltipped" data-position="bottom" data-delay="50" data-tooltip="Últimas notificaçõe" href="badges.html"><i
+				class="material-icons fa fa-bell" aria-hidden="true"></i></a></li> -->
 	</ul>
 
 	<div layout:fragment="search-menu-bar" class="nav-wrapper col l10" style="display: inline-block; position: relative; left: 20px;">
@@ -31,11 +31,16 @@
 			<!-- <div class="card-panel grey lighten-4"></div> -->
 		</div>
 
-		<div style="width: 100%; position: fixed; text-align: center; top: 50%; margin-top: -50px;" class="invisible js-loading">
+		<!-- <div style="width: 100%; position: fixed; text-align: center; top: 50%; margin-top: -50px;" class="invisible js-loading">
 			<img th:src="@{/img/loading.gif}" alt="Carregando" />
-		</div>
+		</div> -->
 
 		<div class="row" style="margin-top: 25px;">
+
+			<div class="js-no-records-found invisible col s12 m12 l12">
+				<img alt="Nenhum registro encontrado" th:src="@{/img/ic_no_records.png}" class="ic-no-records" /> <span class="no-records-found-text">Nenhum
+					resultado para </span> <span class="js-filter-expression no-records-found-text"></span>
+			</div>
 
 			<div class="col s12 m12 l12">
 
@@ -62,7 +67,8 @@
 
 			<form target="_blank" th:action="@{/qrcode/clientes/download}" class="js-form-gerar" method="post">
 				<input type="hidden" name="ids" class="js-hidden-records" value="" />
-				<button type="button" class="btn-floating btn-large waves-effect waves-light orange darken-2 tooltipped js-btn-gerar scale-transition scale-out"
+				<button type="button"
+					class="btn-floating btn-large waves-effect waves-light orange darken-2 tooltipped js-btn-gerar scale-transition scale-out"
 					data-position="left" data-delay="50" data-tooltip="Gerar QRCode">
 					<i class="fa fa-qrcode" aria-hidden="true"></i>
 				</button>

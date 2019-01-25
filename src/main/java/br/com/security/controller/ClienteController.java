@@ -1,6 +1,7 @@
 package br.com.security.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -34,8 +35,8 @@ import br.com.security.wrapper.PageWrapper;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-	public final String CADASTRO_VIEW = "/cliente/cadastro";
-	public final String CONSULTA_VIEW = "/cliente/consulta";
+	public final String CADASTRO_VIEW = "cliente/cadastro";
+	public final String CONSULTA_VIEW = "cliente/consulta";
 
 	public final String PARAM_CIDADES = "cidades";
 	public final String PARAM_FILTRO = "filtro";
@@ -127,28 +128,35 @@ public class ClienteController {
 		}
 
 		// valida se o email já foi cadastrado por outro cliente
-		if (clienteRepository.emailAlreadyExists(cliente.getEmail(), AppUtils.checkId(cliente.getId()))) {
+		/*if (clienteRepository.emailAlreadyExists(cliente.getEmail(), AppUtils.checkId(cliente.getId()))) {
 			errors.rejectValue("email", null, "Email já está sendo usado!");
 			return mv;
-		}
+		}*/
 
 		// valida se o cpf já foi cadastrado por outro cliente
-		if (clienteRepository.cpfAlreadyExists(cliente.getCpf(), AppUtils.checkId(cliente.getId()))) {
+		/*if (clienteRepository.cpfAlreadyExists(cliente.getCpf(), AppUtils.checkId(cliente.getId()))) {
 			errors.rejectValue("cpf", null, "CPF já está sendo usado!");
 			return mv;
-		}
+		} */
 
 		// valida se o cnpj já foi cadastrado por outro cliente
-		if (clienteRepository.cnpjAlreadyExists(cliente.getCnpj(), AppUtils.checkId(cliente.getId()))) {
+		/*if (clienteRepository.cnpjAlreadyExists(cliente.getCnpj(), AppUtils.checkId(cliente.getId()))) {
 			errors.rejectValue("cnpj", null, "CNPJ já está sendo usado!");
 			return mv;
-		}
+		}*/
 
 		// valida se o celular já foi cadastrado por outro cliente
 		if (clienteRepository.celularAlreadyExists(cliente.getTelefone1(), AppUtils.checkId(cliente.getId()))) {
 			errors.rejectValue("telefone1", null, "Celular já está sendo usado!");
 			return mv;
 		}
+
+		// remove a mascara dos telefones
+		cliente.setTelefone1(AppUtils.onlyNumbers(cliente.getTelefone1()));
+		cliente.setTelefone2(cliente.getTelefone2() != null ? AppUtils.onlyNumbers(cliente.getTelefone2()) : "");
+
+		// atualiza data de alteração para sincronzição com os dispositivos moveis
+		cliente.setDataAlteracao(new Date());
 
 		clienteRepository.save(cliente);
 		attributes.addFlashAttribute("message", "Cliente salvo com sucesso!");
@@ -167,7 +175,7 @@ public class ClienteController {
 			for (String id : tokens)
 				ids.add(Long.parseLong(id));
 
-			clienteRepository.deleteSelected(ids);
+			clienteRepository.deleteSelected(true, new Date(), ids);
 		}
 
 		return "redirect:/clientes/consulta";

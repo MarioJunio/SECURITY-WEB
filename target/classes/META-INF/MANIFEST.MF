@@ -8,4 +8,5 @@ Implementation-URL: http://projects.spring.io/spring-boot/Security-Web
  /
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: br.com.security.WebSecurityApplication
 
