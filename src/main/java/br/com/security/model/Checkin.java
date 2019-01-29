@@ -32,6 +32,7 @@ public class Checkin implements Serializable {
 	private CheckinStatus status;
 	private String descricao;
 	private Long timeSync;
+	private String foto;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -119,6 +120,16 @@ public class Checkin implements Serializable {
 
 	public void setTimeSync(Long timeSync) {
 		this.timeSync = timeSync;
+	}
+
+	@Lob
+	@Column
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	@Override
