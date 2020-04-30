@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.com.app</groupId>
-	<artifactId>Security-Web</artifactId>
+	<artifactId>security-web</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 

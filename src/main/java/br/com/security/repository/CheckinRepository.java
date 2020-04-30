@@ -22,7 +22,5 @@ public interface CheckinRepository extends PagingAndSortingRepository<Checkin, L
 	public List<VisitaCliente> reportVisitasPorCliente(@Param("id") Long id, @Param("di") Date di, @Param("df") Date df,
 			@Param("status") List<CheckinStatus> status);
 
-	@Query("select c.foto from Checkin c where c.id = :id")
-	public String findFotoByCheckin(@Param("id") Long id);
 
 }
